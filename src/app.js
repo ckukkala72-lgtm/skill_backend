@@ -17,11 +17,16 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
+  "https://skilvantage.com",
+  "https://www.skilvantage.com",
   ...(process.env.CLIENT_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean),
 ];
+
+const isSkilvantageHost = (hostname) =>
+  hostname === "skilvantage.com" || hostname.endsWith(".skilvantage.com");
 
 const isAllowedOrigin = (origin) => {
   if (!origin) return true;
@@ -29,7 +34,10 @@ const isAllowedOrigin = (origin) => {
 
   try {
     const { protocol, hostname } = new URL(origin);
-    return protocol === "https:" && hostname.endsWith(".vercel.app");
+    return (
+      protocol === "https:" &&
+      (hostname.endsWith(".vercel.app") || isSkilvantageHost(hostname))
+    );
   } catch {
     return false;
   }
