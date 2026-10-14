@@ -1,0 +1,52 @@
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema(
+  {
+    learnerType: { type: String, required: true, trim: true, index: true },
+    program: { type: String, required: true, trim: true, index: true },
+    fullName: { type: String, required: true, trim: true },
+    gender: { type: String, default: "", trim: true },
+    phone: { type: String, required: true, trim: true },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      index: true,
+    },
+    city: { type: String, default: "", trim: true },
+    state: { type: String, default: "", trim: true },
+    college: { type: String, default: "", trim: true },
+    degree: { type: String, default: "", trim: true },
+    branch: { type: String, default: "", trim: true },
+    passedOutYear: { type: String, default: "", trim: true },
+    currentYear: { type: String, default: "", trim: true },
+    company: { type: String, default: "", trim: true },
+    designation: { type: String, default: "", trim: true },
+    experience: { type: String, default: "", trim: true },
+    domain: { type: String, default: "", trim: true },
+    qualification: { type: String, default: "", trim: true },
+    skillSet: { type: String, default: "", trim: true },
+    languages: { type: String, default: "", trim: true },
+    tools: { type: String, default: "", trim: true },
+    certifications: { type: String, default: "", trim: true },
+    previousProjects: { type: String, default: "", trim: true },
+    careerTrack: { type: String, default: "", trim: true },
+    expectedSalary: { type: String, default: "", trim: true },
+    jobRole: { type: String, default: "", trim: true },
+    lookingFor: { type: String, default: "", trim: true },
+    learningMode: { type: String, default: "", trim: true },
+    availability: { type: String, default: "", trim: true },
+    hearAbout: { type: String, default: "", trim: true },
+    linkedin: { type: String, default: "", trim: true },
+    github: { type: String, default: "", trim: true },
+    resumeName: { type: String, default: "", trim: true },
+    consent: { type: Boolean, default: false },
+    status: { type: String, default: "registered", index: true },
+    answers: { type: mongoose.Schema.Types.Mixed, default: {} },
+  },
+  { timestamps: true, collection: "users" }
+);
+
+module.exports = mongoose.model("User", userSchema);
